@@ -7,8 +7,8 @@ Before you run this project, be sure to install all required packages:
 pip install flask flask-sqlalchemy flask-login
 ```
 Additionally, in `taskapp.py` make sure to change this line:
-app.config['SECRET_KEY'] = 'some key here'
-To another secure random key. You can generate this by running:
+`app.config['SECRET_KEY'] = 'some key here'`
+Specifically, change the secret key to your own. You can generate this by running:
 ```
 import secrets
 print(secrets.token_hex(16))
