@@ -1,1 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Login</h1>
 
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash-message {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form action="{{ url_for('login') }}" method="POST" class="auth-form">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="off">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="off">
+    </div>
+
+    <button type="submit" class="auth-btn">Login</button>
+  </form>
+
+  <div class="auth-footer">
+    Don't have an account? <a href="{{ url_for('register') }}">Register here</a>
+  </div>
+{% endblock %}
