@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'some key here'
 To another secure random key. You can generate this by running:
 ```
 import secrets
-print(secrets.token_hex(16)
+print(secrets.token_hex(16))
 ```
 Or just choose your own.
 
