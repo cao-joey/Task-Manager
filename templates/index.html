@@ -1,1 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="header">
+    <h1>To-Do List</h1>
+    <div class="user-info">
+      <span>Welcome, {{ current_user.name }}!</span>
+      <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+  </div>
 
+  <!-- Show flash messages (green = success, red = error)-->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash-message {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form action="{{ url_for('add') }}" method="POST">
+    <input type="text" name="task" placeholder="Enter a new task" required maxlength="100" autocomplete="off">
+    <button type="submit">Add</button>
+  </form>
+
+  <ul>
+    {% for task in tasks %}
+      <li class="{% if task.done %}done{% endif %}">
+        <span>{{ task.text }}</span>
+
+        <div class="actions">
+          <!-- Checkbox for completion -->
+          <a href="{{ url_for('toggle', task_id=task.id) }}" class="checkbox">
+            {% if task.done %}☑{% else %}☐{% endif %}
+          </a>
+
+          <!-- Show X when task is completed -->
+          {% if task.done %}
+            <a href="{{ url_for('delete', task_id=task.id) }}" class="delete-btn">✕</a>
+          {% endif %}
+        </div>
+      </li>
+    {% else %}
+      <li class="empty-state">No tasks yet!</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
