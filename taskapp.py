@@ -5,7 +5,7 @@ from models import db, User, Task
 app = Flask(__name__)
 
 # Config 
-app.config['SECRET_KEY'] = 'some secret key' # Encrypt cookie session
+app.config['SECRET_KEY'] = 'some key here' # Encrypt cookie session
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db' # Stores db in tasks.db
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
